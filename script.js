@@ -13,3 +13,8 @@ function getComputerChoice() {
 
     return weapon;
 }
+
+function getHumanChoice(){
+    let choice = prompt("Choose your weapon: (rock / paper / scissors)");
+    return choice;
+}
