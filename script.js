@@ -116,3 +116,5 @@ function playGame() {
         }
     }
 }
+
+playGame();
