@@ -15,68 +15,104 @@ function getComputerChoice() {
 }
 
 function getHumanChoice(){
-    let choice = prompt("Choose your weapon: (rock / paper / scissors)");
-    return choice.toLocaleLowerCase();
-}
+    let checkAnswer = true;
+    let choice = '';
 
-let humanScore = 0;
-let computerScore = 0;
+    while(checkAnswer) {
+       choice = prompt("Choose your weapon: (rock / paper / scissors)");
 
-function playRound(humanChoice, computerChoice) {
-    switch(humanChoice) {
-        case 'rock':
-            if (computerChoice === 'rock') {
-                console.log('It\'s a draw!');
-                break;
-            } else if (computerChoice !== 'paper') {
-                humanScore++;
-                computerScore--;
-                console.log('Rock beats Scissors - You win!');
-                break;
-            } else {
-                humanScore--;
-                computerScore++;
-                console.log('Paper beats Rock - You lose!');
-                break;
-            }
-        case 'paper':
-            if (computerChoice === 'paper') {
-                console.log('It\'s a draw!');
-                break;
-            } else if (computerChoice !== 'scissors') {
-                humanScore++;
-                computerScore--;
-                console.log('Paper beats Rock - You win!');
-                break;
-            } else {
-                humanScore--;
-                computerScore++;
-                console.log('Scissors beats Paper - You lose!');
-                break;
-            }
-        case 'scissors':
-            if (computerChoice === 'scissors') {
-                console.log('It\'s a draw!');
-                break;
-            } else if (computerChoice !== 'rock') {
-                humanScore++;
-                computerScore--;
-                console.log('Scissors beats Paper - You win!');
-                break;
-            } else {
-                humanScore--;
-                computerScore++;
-                console.log('Rock beats Scissors - You lose!');
-                break;
-            }
-        default:
-            console.log('Invalid weapon');
-            break;
+       if (choice !== 'rock' && choice !== 'paper' && choice !== 'scissors') {
+        console.log(`
+            Invalid weapon, please try again.
+            `);
+        continue;
+       } else {
+            checkAnswer = false;
+            return choice.toLocaleLowerCase();
+       }
     }
-    console.log(`Your score: ${humanScore}`)
 }
 
-// const humanSelection = getHumanChoice();
-// const computerSelection = getComputerChoice();
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+    let roundCounter = 1;
+    let isItRollin = true;
 
-// playRound(humanSelection, computerSelection);
+    let playRound = (humanChoice, computerChoice) => {
+        switch(humanChoice) {
+            case 'rock':
+                if (computerChoice === 'rock') {
+                    console.log('It\'s a draw!');
+                    break;
+                } else if (computerChoice !== 'paper') {
+                    humanScore++;
+                    computerScore--;
+                    console.log('Rock beats Scissors - You win!');
+                    break;
+                } else {
+                    humanScore--;
+                    computerScore++;
+                    console.log('Paper beats Rock - You lose!');
+                    break;
+                }
+            case 'paper':
+                if (computerChoice === 'paper') {
+                    console.log('It\'s a draw!');
+                    break;
+                } else if (computerChoice !== 'scissors') {
+                    humanScore++;
+                    computerScore--;
+                    console.log('Paper beats Rock - You win!');
+                    break;
+                } else {
+                    humanScore--;
+                    computerScore++;
+                    console.log('Scissors beats Paper - You lose!');
+                    break;
+                }
+            case 'scissors':
+                if (computerChoice === 'scissors') {
+                    console.log('It\'s a draw!');
+                    break;
+                } else if (computerChoice !== 'rock') {
+                    humanScore++;
+                    computerScore--;
+                    console.log('Scissors beats Paper - You win!');
+                    break;
+                } else {
+                    humanScore--;
+                    computerScore++;
+                    console.log('Rock beats Scissors - You lose!');
+                    break;
+                }
+            default:
+                console.log('Invalid weapon');
+                break;
+        }
+    };
+
+    while(isItRollin) {
+        if (roundCounter > 5) {
+            console.log(`
+                Game is over.
+                Score: ${humanScore}
+                `);
+            humanScore = 0;
+            computerScore = 0;
+            roundCounter = 1;
+            break;
+        } else {
+            let humanSelection = getHumanChoice();
+            let computerSelection = getComputerChoice();
+            playRound(humanSelection, computerSelection);
+    
+            console.log(`
+                Current score: ${humanScore}
+                Current Round: ${roundCounter}/5
+                `);
+            roundCounter++;
+            continue;
+        }
+    }
+}
