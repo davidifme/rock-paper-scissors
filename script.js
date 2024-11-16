@@ -36,8 +36,6 @@ function getHumanChoice(){
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
-    let roundCounter = 1;
-    let isItRollin = true;
 
     let playRound = (humanChoice, computerChoice) => {
         switch(humanChoice) {
@@ -91,30 +89,14 @@ function playGame() {
                 break;
         }
     };
-
-    while(isItRollin) {
-        if (roundCounter > 5) {
-            console.log(`
-                Game is over.
-                Score: ${humanScore}
-                `);
-            humanScore = 0;
-            computerScore = 0;
-            roundCounter = 1;
-            break;
-        } else {
-            let humanSelection = getHumanChoice();
-            let computerSelection = getComputerChoice();
-            playRound(humanSelection, computerSelection);
-    
-            console.log(`
-                Current score: ${humanScore}
-                Current Round: ${roundCounter}/5
-                `);
-            roundCounter++;
-            continue;
-        }
-    }
 }
+
+const selectionButtons = document.querySelectorAll("button.selectionButton");
+
+selectionButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        console.log(`${button.textContent}`)
+    });
+});
 
 playGame();

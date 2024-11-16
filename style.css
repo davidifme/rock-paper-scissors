@@ -1,0 +1,11 @@
+body {
+    background-color: #6c6c6c;
+}
+
+#display {
+    width: 350px;
+    height: 50px;
+    background-color: #fff;
+    border: 1px white solid;
+    margin-bottom: 15px;
+}
