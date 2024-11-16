@@ -12,3 +12,11 @@ body {
     border: 1px white solid;
     margin-bottom: 15px;
 }
+
+.counter-container,
+.score-container {
+    display: flex;
+    gap: 8px;
+    color: white;
+    margin-top: 10px;
+}
